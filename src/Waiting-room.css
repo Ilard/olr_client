@@ -1,0 +1,43 @@
+.waiting-room-container {
+  font-family: 'Montserrat', sans-serif;
+  color: #FFF;
+}
+
+.waiting-room-container .waiting-room-status {
+
+}
+
+.waiting-room-container .waiting-room-status .waiting-loader {
+  padding-top: 120px;
+  background: url('svg/loader.svg') no-repeat top center;
+  background-size: auto 100px;
+  text-align: center;
+}
+
+.waiting-room-container .waiting-room-list {
+
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-title {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-title h2 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-items {
+
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-items ul {
+  text-align: center;
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-items ul li {
+  margin: 5px 0;
+  font-weight: 400;
+  font-size: 14px;
+}
