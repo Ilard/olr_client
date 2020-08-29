@@ -5,10 +5,21 @@ import WaitingRoom from './Waiting-room';
 import './reset.css';
 import './index.css';
 
-const user = "User1",
-      data = {"status":false,"waitingRoom":["User1","User2","User3","User4"]};
 
-ReactDOM.render(
-  <WaitingRoom user={user} data={data} />,
-  document.getElementById('app')
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {username:''};
+  }
+  setUsername(username) {
+    this.setState({username:username});
+  }
+  render() {
+    if (this.state.username !== '') {
+      return <WaitingRoom />
+    }
+    return <Login app={this} />
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
