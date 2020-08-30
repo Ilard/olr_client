@@ -1,10 +1,13 @@
 .waiting-room-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
   font-family: 'Montserrat', sans-serif;
   color: #FFF;
 }
 
 .waiting-room-container .waiting-room-list .waiting-room-list-title {
-  margin-top: 100px;
   text-align: center;
 }
 

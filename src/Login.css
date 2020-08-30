@@ -3,11 +3,7 @@
   width: 80%;
 }
 
-.login-container .login-form {
-
-}
-
-.login-container .login-form .login-field {
+.login-container .login-field {
   height: 40px;
   width: 100%;
   border-radius: 20px;
@@ -18,4 +14,10 @@
   color: #454545;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+}
+
+.login-container .login-field.login-field-error {
+  border: 2px solid rgba(211, 47, 17, .6);
+  font-weight: 600;
+  color: #d32f2f;
 }
