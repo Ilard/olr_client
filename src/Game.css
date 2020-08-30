@@ -1,0 +1,27 @@
+.game-container {
+
+}
+
+.game-container .game-commands {
+
+}
+
+.game-container .game-commands .game-command-fire {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  border: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #FFF;
+
+  transition: background-color ease-in-out .2s;
+}
+
+.game-container .game-commands .game-command-fire.fire {
+  background-color: rgba(255, 255, 255, 0.8);
+}

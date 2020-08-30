@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Game from './Game';
 import Login from './Login';
 import WaitingRoom from './Waiting-room';
 import './reset.css';
@@ -9,16 +10,30 @@ import './index.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {username:''};
+    this.state = {
+      username:'',
+      isReady:false
+    };
   }
   setUsername(username) {
     this.setState({username:username});
   }
-  render() {
-    if (this.state.username !== '') {
-      return <WaitingRoom username={this.state.username} />
+  playerIsReady(status) {
+    if (status) {
+      this.setState({isReady:true});
     }
-    return <Login app={this} />
+  }
+  render() {
+    const {username, isReady} = this.state;
+
+    if (isReady) {
+      return <Game app={this} />
+    } else {
+      if (username !== '') {
+        return <WaitingRoom username={username} app={this}/>
+      }
+      return <Login app={this} />
+    }
   }
 }
 

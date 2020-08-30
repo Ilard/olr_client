@@ -30,7 +30,8 @@ class WaitingRoom extends React.Component {
     }, 1000);
   }
   render() {
-    const {isLoaded, data} = this.state;
+    const {isLoaded, data} = this.state,
+          {username, app} = this.props;
 
     if (!isLoaded) {
       return (
@@ -44,7 +45,7 @@ class WaitingRoom extends React.Component {
       return (
         <div className="waiting-room-container">
           <div className="waiting-room-status">
-            <GameStatus progress={data.gameInProgress} playersInGame={data.playersInGame} />
+            <GameStatus app={app} username={username} progress={data.gameInProgress} playersInGame={data.playersInGame} />
           </div>
           <div className="waiting-room-list">
             <div className="waiting-room-list-title">
