@@ -1,0 +1,10 @@
+.waiting-room-container .waiting-room-status {
+
+}
+
+.waiting-room-container .waiting-room-status .waiting-loader {
+  padding-top: 120px;
+  background: url('svg/loader.svg') no-repeat top center;
+  background-size: auto 100px;
+  text-align: center;
+}

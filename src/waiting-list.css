@@ -1,0 +1,9 @@
+.waiting-room-container .waiting-room-list .waiting-room-list-items ul {
+  text-align: center;
+}
+
+.waiting-room-container .waiting-room-list .waiting-room-list-items ul li {
+  margin: 5px 0;
+  font-weight: 400;
+  font-size: 14px;
+}

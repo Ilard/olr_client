@@ -1,38 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Waiting-room.css';
+import GameStatus from './game-status';
+import WaitingList from './waiting-list'
 
-class WaitingRoom extends Component {
+class WaitingRoom extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      isLoaded: false,
+      data: {}
+    };
+  }
+  componentDidMount() {
+    setInterval(() => {
+      fetch(process.env.REACT_APP_API_URL)
+      .then((response) => {
+        return response.json();
+      })
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            data:result
+          });
+        },
+        (error) => {
+          console.log(error);
+        })
+    }, 1000);
   }
   render() {
-    return (
-      <div className="waiting-room-container">
-        <div className="waiting-room-status">
-          {(() => {
-            if (this.props.data.status) {
-              return <button className="button">JOUER !</button>
-            } else {
-              return <div className="waiting-loader">Partie en cours...</div>
-            }
-          })()}
-        </div>
-        <div className="waiting-room-list">
-          <div className="waiting-room-list-title">
-            <h2>Liste d'attente</h2>
-          </div>
-          <div className="waiting-room-list-items">
-            <ul>
-              {
-                this.props.data.waitingRoom.map((elem, index) => {
-                  return <li key={index}>{elem}</li>
-                })
-              }
-            </ul>
+    const {isLoaded, data} = this.state;
+
+    if (!isLoaded) {
+      return (
+        <div className="waiting-room-container">
+          <div className="waiting-room-status">
+            <div className="waiting-loader">Chargement...</div>
           </div>
         </div>
-      </div>
-    );
+      )
+    } else {
+      return (
+        <div className="waiting-room-container">
+          <div className="waiting-room-status">
+            <GameStatus progress={data.gameInProgress} playersInGame={data.playersInGame} />
+          </div>
+          <div className="waiting-room-list">
+            <div className="waiting-room-list-title">
+              <h2>Liste d'attente</h2>
+            </div>
+            <div className="waiting-room-list-items">
+              <WaitingList waitingList={data.waitingList} />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

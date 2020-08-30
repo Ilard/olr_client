@@ -16,7 +16,7 @@ class App extends React.Component {
   }
   render() {
     if (this.state.username !== '') {
-      return <WaitingRoom />
+      return <WaitingRoom username={this.state.username} />
     }
     return <Login app={this} />
   }
