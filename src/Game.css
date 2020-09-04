@@ -1,13 +1,4 @@
-.game-container {
-
-}
-
-.game-container .game-commands {
-
-}
-
-.game-container .game-commands .game-command-fire {
-  position: relative;
+.game-container .game-commands .game-command-run {
   display: block;
   margin: 0 auto;
   width: 100px;
@@ -19,9 +10,13 @@
   font-weight: 700;
   color: #FFF;
 
-  transition: background-color ease-in-out .2s;
+  transition: height ease-in-out .1s,
+              width ease-in-out .1s,
+              background-color ease-in-out .1s;
 }
 
-.game-container .game-commands .game-command-fire.fire {
-  background-color: rgba(255, 255, 255, 0.8);
+.game-container .game-commands .game-command-run.run {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(255, 47, 17, 0.6);
 }
