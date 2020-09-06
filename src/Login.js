@@ -5,26 +5,53 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error:false,
-      username:''
+      name:'',
+      list:'',
+      loginError:false,
     };
+
+    this._isMounted = false;
   }
-  editUsername = (event) => {
-    this.setState({username:event.target.value});
+  editUser = (event) => {
+    this.setState({
+      name:event.target.value
+    });
   }
-  updateUsername = () => {
-    const username = this.state.username;
-    if (username !== '') {
-      this.props.app.setUsername(username);
+  updateUser = () => {
+    const name = this.state.name;
+    if (name !== '') {
+      this.logUser();
+      this.props.app.setUser(name, this.state.list);
     } else {
-      this.setState({error:true});
+      this.setState({loginError:true});
     }
+  }
+  logUser = () => {
+    fetch(process.env.REACT_APP_API_URL + '/game/login/' + this.state.name)
+    .then((response) => {
+      return response.json();
+    })
+    .then(
+      (result) => {
+        if (this._isMounted) {
+          this.setState(result);
+        }
+      },
+      (error) => {
+        console.error(error);
+      })
+  }
+  componentDidMount() {
+    this._isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   render() {
     return (
       <div className='login-container'>
-        <input className={this.state.error ? 'login-field login-field-error' : 'login-field'} type='text' onChange={this.editUsername} placeholder='Pseudo' value={this.state.username} />
-        <button className='button' onClick={this.updateUsername}>Jouer</button>
+        <input className={this.state.loginError ? 'login-field login-field-error' : 'login-field'} type='text' onChange={this.editUser} placeholder='Pseudo' value={this.state.username} />
+        <button className='button' onClick={this.updateUser}>Jouer</button>
       </div>
     );
   }

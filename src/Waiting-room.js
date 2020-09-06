@@ -1,6 +1,6 @@
 import React from 'react';
 import './Waiting-room.css';
-import GameStatus from './game-status';
+import Players from './players';
 import WaitingList from './waiting-list'
 
 class WaitingRoom extends React.Component {
@@ -8,12 +8,12 @@ class WaitingRoom extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      data: {}
+      inProgress: true
     };
   }
   componentDidMount() {
     setInterval(() => {
-      fetch(process.env.REACT_APP_API_URL)
+      fetch(process.env.REACT_APP_API_URL + '/game/status')
       .then((response) => {
         return response.json();
       })
@@ -21,17 +21,17 @@ class WaitingRoom extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            data:result
+            inProgress:result
           });
         },
         (error) => {
-          console.log(error);
+          console.error(error);
         })
     }, 1000);
   }
   render() {
-    const {isLoaded, data} = this.state,
-          {username, app} = this.props;
+    const {isLoaded, inProgress} = this.state,
+          {name, app} = this.props;
 
     if (!isLoaded) {
       return (
@@ -42,21 +42,25 @@ class WaitingRoom extends React.Component {
         </div>
       )
     } else {
-      return (
-        <div className="waiting-room-container">
-          <div className="waiting-room-status">
-            <GameStatus app={app} username={username} progress={data.gameInProgress} playersInGame={data.playersInGame} />
-          </div>
-          <div className="waiting-room-list">
-            <div className="waiting-room-list-title">
-              <h2>Liste d'attente</h2>
+      if (inProgress) {
+        return <div className="waiting-loader">Partie en cours...</div>
+      } else {
+        return (
+          <div className="waiting-room-container">
+            <div className="waiting-room-status">
+              <Players name={name} app={app} />
             </div>
-            <div className="waiting-room-list-items">
-              <WaitingList waitingList={data.waitingList} />
+            <div className="waiting-room-list">
+              <div className="waiting-room-list-title">
+                <h2>Liste d'attente</h2>
+              </div>
+              <div className="waiting-room-list-items">
+                <WaitingList />
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     }
   }
 }

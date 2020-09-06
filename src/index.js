@@ -11,12 +11,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username:'',
+      name:'',
+      list:'',
       isReady:false
     };
   }
-  setUsername(username) {
-    this.setState({username:username});
+  setUser(name, list) {
+    this.setState({
+      name:name,
+      list:list
+    });
   }
   playerIsReady(status) {
     if (status) {
@@ -24,13 +28,13 @@ class App extends React.Component {
     }
   }
   render() {
-    const {username, isReady} = this.state;
+    const {name, isReady} = this.state;
 
     if (isReady) {
       return <Game app={this} />
     } else {
-      if (username !== '') {
-        return <WaitingRoom username={username} app={this}/>
+      if (name !== '') {
+        return <WaitingRoom name={name} app={this}/>
       }
       return <Login app={this} />
     }
